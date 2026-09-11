@@ -4,7 +4,7 @@ import DocumentInspector from './components/DocumentInspector';
 import ResearchAndSouvenir from './components/ResearchAndSouvenir';
 import ChronologyView from './components/ChronologyView';
 import { ARCHIVE_DATA } from './data';
-import { ChevronRight } from 'lucide-react';
+import { BookOpen, ChevronRight } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('archive');
@@ -14,9 +14,9 @@ export default function App() {
   const selectedDoc = ARCHIVE_DATA.find((d) => d.id === selectedDocId) || ARCHIVE_DATA[0];
 
   return (
-    <div className="min-h-screen bg-[#0f141c] text-[#e6edf3] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#0d1017] text-[#e4decb] flex flex-col font-sans">
       
-      {/* 1. Official Header */}
+      {/* 1. Archival Emblem Header */}
       <Navbar
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -24,45 +24,56 @@ export default function App() {
         onLangChange={setActiveLang}
       />
 
-      {/* 2. Main Content Body */}
-      <div className="flex-1 max-w-[1700px] w-full mx-auto p-5 md:p-6">
+      {/* 2. Main Stage */}
+      <main className="flex-1 max-w-[1700px] w-full mx-auto p-5 md:p-6">
         {activeTab === 'archive' ? (
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             
-            {/* Catalog Selector Ribbon */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {ARCHIVE_DATA.map((doc) => {
-                const isCurrent = doc.id === selectedDoc.id;
-                return (
-                  <button
-                    key={doc.id}
-                    onClick={() => setSelectedDocId(doc.id)}
-                    className={`p-3.5 rounded-lg border text-left transition ${
-                      isCurrent
-                        ? 'bg-[#1a2332] border-[#c99347]'
-                        : 'bg-[#141b25] border-[#222d3f] hover:bg-[#18212e]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between text-[11px] font-mono text-[#8797ad]">
-                      <span>{doc.accessionNo}</span>
-                      <span className="text-[#c99347] font-semibold">{doc.date.split(' ').pop()}</span>
-                    </div>
-                    <div className="text-sm font-semibold text-white mt-1 line-clamp-1">
-                      {doc.title}
-                    </div>
-                    <div className="mt-2 text-[11px] text-[#718299] flex items-center justify-between">
-                      <span>{doc.collection}</span>
-                      <span className="text-[#c99347] flex items-center">
-                        Select <ChevronRight className="w-3 h-3 ml-0.5" />
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+            {/* Folio Registry Selector */}
+            <div>
+              <div className="flex items-center justify-between mb-3 px-1">
+                <span className="font-vintage-mono text-xs font-bold text-[#cba358] uppercase tracking-wider flex items-center gap-2">
+                  <BookOpen className="w-3.5 h-3.5" /> Archival Catalog Register (Choose a primary manuscript)
+                </span>
+                <span className="font-vintage-mono text-[11px] text-[#7d705e]">
+                  COLLECTION: 22 PUBLISHED TOMES
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                {ARCHIVE_DATA.map((doc) => {
+                  const isCurrent = doc.id === selectedDoc.id;
+                  return (
+                    <button
+                      key={doc.id}
+                      onClick={() => setSelectedDocId(doc.id)}
+                      className={`p-4 rounded-lg text-left transition border ${
+                        isCurrent
+                          ? 'bg-[#1c160e] border-[#cba358] shadow-lg shadow-[#000000]/60'
+                          : 'bg-[#12161f] border-[#292218] hover:bg-[#161c27] hover:border-[#3d3121]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between text-[10px] font-vintage-mono text-[#8a7b68]">
+                        <span className="text-[#cba358] font-bold">{doc.accessionNo}</span>
+                        <span>{doc.date.split(' ').pop()}</span>
+                      </div>
+                      <div className="font-cinzel text-sm font-bold text-[#ede5d2] mt-2 line-clamp-1">
+                        {doc.title}
+                      </div>
+                      <div className="mt-3 text-[11px] text-[#786c5a] flex items-center justify-between font-newsreader italic text-[13px] border-t border-[#261f15] pt-2">
+                        <span>{doc.collection}</span>
+                        <span className="text-[#cba358] font-vintage-mono text-[10px] uppercase font-bold flex items-center not-italic">
+                          Open Folio <ChevronRight className="w-3 h-3 ml-0.5" />
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Main Dual Stage */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+            {/* Document Stage */}
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
               <div className="xl:col-span-8">
                 <DocumentInspector doc={selectedDoc} activeLang={activeLang} />
               </div>
@@ -75,20 +86,18 @@ export default function App() {
         ) : (
           <ChronologyView />
         )}
-      </div>
+      </main>
 
-      {/* 3. Official Institutional Footer */}
-      <footer className="border-t border-[#1f2838] bg-[#0c1117] py-3.5 px-6 text-xs text-[#6e7f96]">
-        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4 font-mono text-[11px]">
+      {/* 3. Colophon Footer */}
+      <footer className="border-t border-[#261f15] bg-[#090c12] py-3.5 px-6 text-xs text-[#706453]">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4 font-vintage-mono text-[10px]">
           <div>
-            Dr. Ambedkar International Centre (DAIC) • Smart India Hackathon 2026 Deployment
+            DAIC HISTORICAL DOCUMENTATION WING • NATIONAL HERITAGE PROTOCOL SIH26096
           </div>
-          <div className="flex items-center gap-4">
-            <span>Encoding: UTF-8</span>
+          <div className="flex items-center gap-3">
+            <span>PRINT REGISTER: VERIFIED</span>
             <span>•</span>
-            <span>Index Status: Synchronized</span>
-            <span>•</span>
-            <span>Station ID: KIOSK-DEL-01</span>
+            <span>RESTORATION LEVEL: ARCHIVAL 1A</span>
           </div>
         </div>
       </footer>

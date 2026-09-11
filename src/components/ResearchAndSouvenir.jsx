@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Mic, BookOpen, Printer, CheckCircle } from 'lucide-react';
+import { Search, Mic, BookMarked, Printer, Check, Feather } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function ResearchAndSouvenir({ activeDoc }) {
-  // AI Query Panel State
   const [query, setQuery] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -13,7 +12,6 @@ export default function ResearchAndSouvenir({ activeDoc }) {
     referenceId: "CAD/1949/OFF-REP-V9-P297"
   });
 
-  // Souvenir Station State
   const [isDispensing, setIsDispensing] = useState(false);
   const [dispensedAlert, setDispensedAlert] = useState(false);
 
@@ -25,8 +23,8 @@ export default function ResearchAndSouvenir({ activeDoc }) {
     setTimeout(() => {
       setResearchResult({
         summary: activeDoc.id === 'DAIC-MS-1927-04'
-          ? "At Mahad (1927), Dr. Ambedkar clarified that the struggle was not over water as a resource, but an assertion of constitutional civic equality and human dignity."
-          : "Dr. Ambedkar maintained that political democracy is fragile without social democracy—a social structure acknowledging liberty, equality, and fraternity.",
+          ? "At Mahad (1927), Dr. Ambedkar clarified that the struggle was not over water as a natural commodity, but an assertion of fundamental civic equality, human personality, and constitutional personhood."
+          : "Dr. Ambedkar maintained that political democracy remains unstable unless grounded in social democracy—a communal fabric upholding liberty, equality, and fraternity as the principles of life.",
         source: `Writings and Speeches, ${activeDoc.volume}, Page ${activeDoc.page}`,
         referenceId: activeDoc.accessionNo
       });
@@ -36,7 +34,7 @@ export default function ResearchAndSouvenir({ activeDoc }) {
 
   const handleVoiceInput = () => {
     setIsRecording(true);
-    setQuery("Transcribing audio query...");
+    setQuery("Transcribing oral inquiry...");
     setTimeout(() => {
       setIsRecording(false);
       const text = "What civic proclamation was declared at the 1927 Mahad Satyagraha?";
@@ -54,147 +52,148 @@ export default function ResearchAndSouvenir({ activeDoc }) {
       setDispensedAlert(true);
       confetti({
         particleCount: 50,
-        spread: 60,
+        spread: 55,
         origin: { y: 0.85 },
-        colors: ['#c99347', '#334155', '#10b981']
+        colors: ['#cba358', '#8f2f2f', '#362a1a']
       });
-      setTimeout(() => setDispensedAlert(false), 4500);
-    }, 1200);
+      setTimeout(() => setDispensedAlert(false), 5000);
+    }, 1300);
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6">
       
-      {/* 1. Archival Corpus Cross-Examiner */}
-      <div className="bg-[#161d27] archival-border rounded-xl p-5 flex flex-col gap-3">
-        <div className="flex items-center justify-between pb-2.5 border-b border-[#232d3d]">
+      {/* 1. Scholarly Corpus Inquiry Box */}
+      <div className="vintage-card rounded-xl p-5 flex flex-col gap-3.5">
+        <div className="flex items-center justify-between pb-2.5 border-b border-[#2d2417]">
           <div className="flex items-center gap-2">
-            <Search className="w-4 h-4 text-[#c99347]" />
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
-              Archival Query & Cross-Reference
+            <Feather className="w-4 h-4 text-[#cba358]" />
+            <h3 className="font-cinzel text-xs font-bold uppercase tracking-wider text-[#f0e8d5]">
+              Corpus Exegesis & Cross-Inquiry
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-[#8b9bb4] bg-[#1a2230] px-2 py-0.5 rounded border border-[#273347]">
-            RAG CORPUS: VOL 1–22
+          <span className="font-vintage-mono text-[9px] text-[#cba358] bg-[#241c12] border border-[#4a3a22] px-2 py-0.5 rounded">
+            VOLS. 1–22 INDEXED
           </span>
         </div>
 
-        {/* Search Input Bar */}
-        <div className="flex gap-2 mt-1">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Query speeches, CAD debates, or legal writings..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="w-full archival-input rounded-lg px-3.5 py-2 text-xs placeholder:text-[#67778d]"
-            />
-          </div>
-
+        {/* Vintage Styled Search Bar */}
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search speeches, constituent debates, memoranda..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            className="flex-1 bg-[#0c1017] border border-[#382d1c] rounded px-3 py-2 text-xs text-[#ede5d2] font-newsreader text-[14px] placeholder:text-[#6a5e4d] focus:outline-none focus:border-[#cba358]"
+          />
           <button
             onClick={handleVoiceInput}
-            title="Voice Query"
-            className={`p-2 rounded-lg border text-xs transition flex items-center justify-center ${
+            title="Oral Speech Ingestion"
+            className={`p-2 rounded border text-xs transition flex items-center justify-center ${
               isRecording 
-                ? 'bg-rose-950/50 border-rose-600 text-rose-300' 
-                : 'bg-[#1b2330] border-[#2b384d] text-[#8e9eb5] hover:text-white'
+                ? 'bg-[#3b1919] border-[#8a3333] text-[#e89e9e]' 
+                : 'bg-[#1a140d] border-[#382d1c] text-[#cba358] hover:bg-[#261e13]'
             }`}
           >
             <Mic className="w-4 h-4" />
           </button>
-
           <button
             onClick={() => handleSearch()}
             disabled={isProcessing || !query.trim()}
-            className="px-4 py-2 bg-[#c99347] hover:bg-[#b88339] disabled:opacity-50 text-[#0d121a] font-bold text-xs rounded-lg transition"
+            className="px-3.5 py-2 bg-[#cba358] hover:bg-[#b58e45] disabled:opacity-50 text-[#141009] font-cinzel font-bold text-[11px] uppercase tracking-wider rounded transition"
           >
-            {isProcessing ? 'Searching...' : 'Search'}
+            {isProcessing ? 'Consulting...' : 'Query'}
           </button>
         </div>
 
-        {/* Citational Result Container */}
-        <div className="bg-[#101620] border border-[#20293a] rounded-lg p-3.5 space-y-2 mt-1">
-          <div className="flex items-center justify-between text-[11px] text-[#8e9eb5] font-mono">
-            <span className="text-[#c99347] font-semibold flex items-center gap-1">
-              <BookOpen className="w-3.5 h-3.5" /> PRIMARY SOURCE CITATION
+        {/* Canonical Grounded Record Citation */}
+        <div className="bg-[#0e121a] border border-[#292015] rounded p-4 space-y-2 mt-0.5">
+          <div className="flex items-center justify-between text-[11px] font-vintage-mono text-[#a1917b]">
+            <span className="text-[#cba358] font-bold flex items-center gap-1.5">
+              <BookMarked className="w-3.5 h-3.5" /> CANONICAL PRIMARY EXCERPT
             </span>
-            <span>REF: {researchResult.referenceId}</span>
+            <span>{researchResult.referenceId}</span>
           </div>
 
-          <p className="text-xs text-[#cfdae8] leading-relaxed">
-            {researchResult.summary}
+          <p className="font-newsreader italic text-[14px] text-[#e6ded0] leading-relaxed">
+            "{researchResult.summary}"
           </p>
 
-          <div className="pt-2 border-t border-[#1d2636] text-[11px] font-mono text-[#8292a8]">
-            Source: <span className="text-white">{researchResult.source}</span>
+          <div className="pt-2 border-t border-[#241c12] font-vintage-mono text-[10px] text-[#7d705d]">
+            Provenance: <span className="text-[#cfc2a9] font-serif italic text-[12px]">{researchResult.source}</span>
           </div>
         </div>
       </div>
 
-      {/* 2. Physical Souvenir Dispenser Station */}
-      <div className="bg-[#161d27] archival-border rounded-xl p-5 flex flex-col gap-3">
-        <div className="flex items-center justify-between pb-2.5 border-b border-[#232d3d]">
+      {/* 2. Physical Souvenir Station: Perforated Vintage Library Docket */}
+      <div className="vintage-card rounded-xl p-5 flex flex-col gap-3.5">
+        <div className="flex items-center justify-between pb-2.5 border-b border-[#2d2417]">
           <div className="flex items-center gap-2">
-            <Printer className="w-4 h-4 text-[#c99347]" />
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
-              Visitor Commemorative Print Slip
+            <Printer className="w-4 h-4 text-[#cba358]" />
+            <h3 className="font-cinzel text-xs font-bold uppercase tracking-wider text-[#f0e8d5]">
+              Commemorative Accession Docket
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-[#8b9bb4]">58MM THERMAL RECEIPT</span>
+          <span className="font-vintage-mono text-[9px] text-[#8a7b67]">EST. 1927 FORMAT</span>
         </div>
 
-        <p className="text-xs text-[#7e8f05] text-[#8394ab]">
-          Generates a printed archival index card for museum visitors and researchers.
+        <p className="text-xs text-[#8c7f6d] font-newsreader italic text-[13px]">
+          Dispenses an authentic archival index slip for researcher portfolios and museum visitors.
         </p>
 
-        {/* Real Tactile Receipt Card */}
-        <div className="receipt-paper rounded-md p-4 font-mono text-xs text-[#1a1a1a] border border-[#d6cfbe] space-y-2 mt-1">
-          <div className="text-center pb-2 border-b border-dashed border-[#8c8577]">
-            <div className="font-bold tracking-wider text-[11px] uppercase">
-              DR. AMBEDKAR INTERNATIONAL CENTRE
+        {/* Perforated Vintage Paper Ticket */}
+        <div className="vintage-parchment-receipt rounded p-4 font-vintage-mono text-[11px] text-[#241e15] border border-[#b8ab8e] space-y-2 relative">
+          
+          <div className="text-center pb-2 border-b border-dashed border-[#786b54]">
+            <div className="font-cinzel font-bold tracking-widest text-[11px] uppercase text-[#141009]">
+              DR. AMBEDKAR MEMORIAL ARCHIVE
             </div>
-            <div className="text-[10px] text-[#555]">Archival Research & Memorial Kiosk</div>
+            <div className="text-[9px] text-[#5e5443] font-newsreader italic">
+              Government of India • Ministry of Social Justice & Empowerment
+            </div>
           </div>
 
-          <div className="space-y-1 py-1 text-[11px]">
-            <div className="text-[10px] text-[#666] uppercase">Selected Document:</div>
-            <div className="font-bold text-[#111]">{activeDoc.title}</div>
-            <div className="text-[10px] text-[#444]">{activeDoc.date} • {activeDoc.location}</div>
+          <div className="space-y-0.5 py-1 text-[10px]">
+            <div className="text-[#695e4b] uppercase font-bold text-[8px] tracking-wider">Indexed Folio:</div>
+            <div className="font-bold text-[#141009] font-cinzel text-[11px]">{activeDoc.title}</div>
+            <div className="text-[#52493a]">{activeDoc.date} • {activeDoc.location}</div>
           </div>
 
-          <blockquote className="font-serif italic text-[11px] text-[#222] bg-[#f5f0e6] p-2 rounded border-l-2 border-[#8c744f]">
-            "{activeDoc.transcription.slice(0, 115)}..."
+          <blockquote className="font-newsreader italic text-[13px] text-[#1f1911] leading-snug bg-[#ede5cf]/70 p-2 rounded border-l-2 border-[#826938] my-1">
+            "{activeDoc.transcription.slice(0, 110)}..."
           </blockquote>
 
-          <div className="pt-2 border-t border-dashed border-[#8c8577] flex items-center justify-between text-[10px] text-[#555]">
+          <div className="pt-2 border-t border-dashed border-[#786b54] flex items-center justify-between text-[9px] text-[#5e5240]">
             <div>
-              <div className="font-semibold text-[#222]">{activeDoc.accessionNo}</div>
-              <div>{activeDoc.volume}, Page {activeDoc.page}</div>
+              <div className="font-bold font-vintage-mono text-[#1a140d]">{activeDoc.accessionNo}</div>
+              <div>{activeDoc.volume}, PAGE {activeDoc.page}</div>
             </div>
-            <div className="border border-[#777] p-1 font-bold text-[8px] bg-white">
-              VERIFIED
+            <div className="border border-[#70624b] px-1.5 py-0.5 font-vintage-mono font-bold text-[8px] text-[#802b2b] uppercase tracking-wider">
+              AUTHENTICATED
             </div>
           </div>
+
         </div>
 
-        {/* Print Button */}
-        <div className="mt-1 space-y-2">
+        {/* Action Trigger */}
+        <div className="space-y-2">
           <button
             onClick={handlePrintSouvenir}
             disabled={isDispensing}
-            className="w-full py-2.5 rounded-lg bg-[#222e3e] hover:bg-[#2a384d] border border-[#37475e] disabled:opacity-50 text-white font-medium text-xs transition flex items-center justify-center gap-2"
+            className="w-full py-2.5 rounded bg-[#211a12] hover:bg-[#2b2116] border border-[#423421] text-[#e8dcbf] font-cinzel text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2 cursor-pointer shadow"
           >
-            <Printer className="w-4 h-4 text-[#c99347]" />
-            {isDispensing ? 'Printing to Thermal Slot...' : 'Print Memorial Card (प्रिंट करा)'}
+            <Printer className="w-3.5 h-3.5 text-[#cba358]" />
+            {isDispensing ? 'Transmitting to Platen...' : 'Dispense Historical Chit (प्रिंट करा)'}
           </button>
 
           {dispensedAlert && (
-            <div className="text-center text-xs text-emerald-400 bg-emerald-950/30 border border-emerald-800/60 py-2 rounded-lg flex items-center justify-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5" /> Printed successfully. Collect from kiosk tray.
+            <div className="text-center font-vintage-mono text-xs text-[#43965b] bg-[#102116] border border-[#21472c] py-2 rounded flex items-center justify-center gap-1.5">
+              <Check className="w-3.5 h-3.5" /> Archival slip dispensed into platen tray.
             </div>
           )}
         </div>
+
       </div>
 
     </div>

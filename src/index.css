@@ -1,46 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --bg-main: #0f141c;
-    --card-surface: #161d27;
-    --card-border: #263142;
-    --accent-brass: #d4a359;
-    --text-primary: #e6edf3;
-    --text-secondary: #8b9bb4;
+    --bg-parchment-dark: #0d1017;
+    --vellum-panel: #131922;
+    --vellum-border: #2b2319;
+    --antique-brass: #cba358;
+    --brass-muted: #8c6f37;
+    --sepia-wash: #f5eedc;
+    --ink-faded: #9aa5b5;
   }
 
   body {
     margin: 0;
-    background-color: var(--bg-main);
-    color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-parchment-dark);
+    color: #e4decb;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
-    letter-spacing: -0.01em;
+    background-image: 
+      radial-gradient(#201c16 0.75px, transparent 0.75px),
+      radial-gradient(#15120c 0.75px, #0d1017 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
   }
 }
 
-/* Subtle archival hairline rules */
-.archival-border {
-  border: 1px solid #232c3d;
+/* Vintage Font Utility Classes */
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+}
+.font-newsreader {
+  font-family: 'Newsreader', Garamond, Georgia, serif;
+}
+.font-vintage-mono {
+  font-family: 'Space Mono', 'Courier New', monospace;
 }
 
-.archival-input {
-  background: #111722;
-  border: 1px solid #283548;
-  color: #e6edf3;
-  transition: border-color 0.15s ease;
-}
-.archival-input:focus {
-  outline: none;
-  border-color: #c99347;
+/* Vintage Bookbinding & Archival Plate Framing */
+.vintage-card {
+  background: #141a24;
+  border: 1px solid #2e261b;
+  box-shadow: 
+    0 0 0 1px #1d1912,
+    0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  position: relative;
 }
 
-/* Subtle thermal receipt print styling */
-.receipt-paper {
-  background: #fdfbf7;
-  color: #1a1a1a;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+.vintage-card::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed rgba(203, 163, 88, 0.12);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Physical Archival Ink Stamp */
+.archival-stamp {
+  border: 2px solid #b84b3d;
+  color: #b84b3d;
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 100%);
+  transform: rotate(-4deg);
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Aged Library Chit / Thermal Print */
+.vintage-parchment-receipt {
+  background-color: #f7f2e4;
+  color: #1a1610;
+  background-image: repeating-linear-gradient(#f7f2e4 0px, #f7f2e4 23px, #e9e0cb 24px);
+  border: 1px solid #d4c8ad;
+  box-shadow: 
+    inset 0 0 40px rgba(184, 157, 108, 0.25),
+    0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.deckle-edge {
+  background-image: radial-gradient(circle at 10px 0, transparent 0, transparent 4px, #f7f2e4 5px);
+  background-size: 10px 10px;
 }
