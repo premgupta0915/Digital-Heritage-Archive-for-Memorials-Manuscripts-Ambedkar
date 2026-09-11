@@ -21,6 +21,7 @@ import {
   User
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { ragChat, findArchiveItemIdByTitle, printSouvenirRequest } from './api';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('docs');
@@ -33,6 +34,7 @@ export default function App() {
   const [isListening, setIsListening] = useState(false);
   const [aiAnswer, setAiAnswer] = useState(null);
   const [hasPrinted, setHasPrinted] = useState(false);
+  const [souvenirQr, setSouvenirQr] = useState(null);
 
   // Camera Modal State
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -51,6 +53,7 @@ export default function App() {
     }
   ]);
   const [isBotTyping, setIsBotTyping] = useState(false);
+  const [backendOnline, setBackendOnline] = useState(true);
 
   const videoRef = useRef(null);
   const scriptCardRef = useRef(null);
@@ -206,7 +209,7 @@ export default function App() {
     }
   };
 
-  const handleSearch = (customQuery) => {
+  const handleSearch = async (customQuery) => {
     const q = (customQuery || searchQuery).trim().toLowerCase();
     if (!q) return;
 
@@ -226,7 +229,22 @@ export default function App() {
       setTimeout(() => {
         scriptCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 150);
-    } else {
+      return;
+    }
+
+    // No local demo document matched — ask the real backend instead of a
+    // generic canned message.
+    try {
+      const data = await ragChat(customQuery || searchQuery);
+      setBackendOnline(true);
+      const citation = data.citations && data.citations[0];
+      setAiAnswer({
+        text: data.answer,
+        source: citation ? `Vol. ${citation.source_volume || '—'}, Page ${citation.page_number || '—'}` : 'DAIC Archive',
+      });
+    } catch (err) {
+      console.error('RAG search unavailable, using local fallback:', err);
+      setBackendOnline(false);
       setAiAnswer({
         text: lang === 'mr'
           ? "संबंधित लेख व भाषणे उपलब्ध आहेत. खालील हस्तलिखित निवडा."
@@ -238,20 +256,38 @@ export default function App() {
     }
   };
 
-  // Chatbot Send Message Logic
-  const handleSendMessage = (e) => {
+  // Chatbot Send Message Logic — asks the real backend RAG assistant,
+  // grounded on the archive with citations, instead of canned replies.
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     const query = chatInput.trim();
     if (!query) return;
 
-    // Add user message
     const userMsg = { sender: 'user', text: query, docLink: null };
     setChatMessages(prev => [...prev, userMsg]);
     setChatInput('');
     setIsBotTyping(true);
 
-    setTimeout(() => {
-      const lowerQ = query.toLowerCase();
+    // Best-effort local doc link so "Open Folio" still works even when
+    // the backend's answer doesn't map 1:1 onto a local demo document.
+    const lowerQ = query.toLowerCase();
+    const localMatch = DOCUMENTS.find(d => d.keywords.some(k => lowerQ.includes(k.toLowerCase())));
+
+    try {
+      const data = await ragChat(query);
+      setBackendOnline(true);
+      const citation = data.citations && data.citations[0];
+      const sourceLine = citation
+        ? ` (Vol. ${citation.source_volume || '—'}, Page ${citation.page_number || '—'})`
+        : '';
+      setChatMessages(prev => [
+        ...prev,
+        { sender: 'bot', text: `${data.answer}${sourceLine}`, docLink: localMatch ? localMatch.id : null }
+      ]);
+    } catch (err) {
+      console.error('RAG chat unavailable, using local fallback:', err);
+      setBackendOnline(false);
+
       let replyText = "";
       let matchedDocId = null;
 
@@ -294,15 +330,33 @@ export default function App() {
         ...prev,
         { sender: 'bot', text: replyText, docLink: matchedDocId }
       ]);
+    } finally {
       setIsBotTyping(false);
-    }, 600);
+    }
   };
 
-  const printSouvenir = () => {
+  const printSouvenir = async () => {
     setHasPrinted(true);
+    setSouvenirQr(null);
     confetti({ particleCount: 40, spread: 60, origin: { y: 0.85 } });
+
+    // Best-effort: resolve the currently selected document to a real
+    // backend archive_item_id and fetch its actual QR code, so the
+    // souvenir carries a real scannable link rather than just a printout.
+    try {
+      const archiveItemId = await findArchiveItemIdByTitle(selectedDoc.title);
+      if (archiveItemId) {
+        const data = await printSouvenirRequest(archiveItemId);
+        setSouvenirQr(data.qr_image_base64);
+        setBackendOnline(true);
+      }
+    } catch (err) {
+      console.error('Souvenir QR unavailable:', err);
+      setBackendOnline(false);
+    }
+
     setTimeout(() => window.print(), 300);
-    setTimeout(() => setHasPrinted(false), 4000);
+    setTimeout(() => { setHasPrinted(false); setSouvenirQr(null); }, 4000);
   };
 
   return (
@@ -573,6 +627,16 @@ export default function App() {
                     <span>{selectedDoc.citation}</span>
                     <span className="font-bold text-slate-800">[DAIC ARCHIVE]</span>
                   </div>
+
+                  {souvenirQr && (
+                    <div className="flex justify-center pt-2 border-t border-dashed border-slate-400">
+                      <img
+                        src={`data:image/png;base64,${souvenirQr}`}
+                        alt="Souvenir QR code"
+                        className="w-20 h-20"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <button
