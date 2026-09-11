@@ -17,7 +17,7 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import kiosk, rag, search
+from routers import archives, kiosk, rag, search
 
 app = FastAPI(
     title="Digital Heritage Archive API",
@@ -32,6 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(archives.router)
 app.include_router(search.router)
 app.include_router(rag.router)
 app.include_router(kiosk.router)
