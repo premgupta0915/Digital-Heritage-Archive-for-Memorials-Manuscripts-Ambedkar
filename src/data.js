@@ -1,106 +1,98 @@
-export const ARCHIVE_DATA = [
+export const DOCUMENTS = [
   {
-    id: "DAIC-MS-1927-04",
-    title: "Mahad Satyagraha Water Declaration",
+    id: "mahad-1927",
+    title: "Mahad Satyagraha Declaration",
+    bookTitle: "Mahad Satyagraha & Water Proclamation",
+    year: "1927",
     date: "20 March 1927",
-    location: "Mahad, Kolaba District, Bombay Presidency",
-    accessionNo: "DAIC/ARCH/1927/MS-089",
-    format: "Original Print & Speech Manuscript",
-    collection: "Civil Rights & Public Res Publica",
-    volume: "Vol. 17, Part I",
-    page: 114,
-    transcription: "We are not going to the Chhadar Tank to merely drink its water. We are going to the tank to assert that we too are human beings like others.",
-    translationMarathi: "आम्ही केवळ चवदार तळ्याचे पाणी पिण्यासाठी जात नाही आहोत. आम्ही इतर माणसांसारखीच माणसे आहोत हे सिद्ध करण्यासाठी चाललो आहोत.",
-    translationHindi: "हम केवल पानी पीने के लिए चवदार तालाब नहीं जा रहे हैं। हम यह सिद्ध करने जा रहे हैं कि हम भी अन्य लोगों की तरह मनुष्य हैं।",
-    sourceFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
-    restoredFile: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1200",
-    regions: [
-      { term: "Chhadar Tank", coords: { x: 20, y: 32, w: 28, h: 14 } },
-      { term: "human beings", coords: { x: 55, y: 65, w: 26, h: 14 } },
-      { term: "assert", coords: { x: 12, y: 62, w: 18, h: 12 } }
-    ]
+    place: "Mahad, Maharashtra",
+    category: "Civil Rights",
+    summary: "Historic movement at Chhadar tank to establish the fundamental right of untouchables to access public drinking water sources under natural law.",
+    quotes: {
+      en: "We are not going to the Chhadar Tank to merely drink its water. We are going to assert that we too are human beings like others.",
+      mr: "आम्ही केवळ चवदार तळ्याचे पाणी पिण्यासाठी जात नाही आहोत. आम्ही इतर माणसांसारखीच माणसे आहोत हे सिद्ध करण्यासाठी चाललो आहोत.",
+      hi: "हम केवल पानी पीने के लिए चवदार तालाब नहीं जा रहे हैं। हम यह सिद्ध करने जा रहे हैं कि हम भी अन्य लोगों की तरह मनुष्य हैं।"
+    },
+    phonetic: {
+      mr: "Aamhi keval Chavdar talyache paani pin-yasathi jaat naahi aahot. Aamhi itar maansan-sarkhich maanse aahot hey siddha karnyasathi chaal-lo aahot.",
+      hi: "Hum keval paani peene ke liye Chavdar taalab nahi jaa rahe hain. Hum yeh siddha karne jaa rahe hain ki hum bhi anya logon ki tarah manushya hain."
+    },
+    citation: "Writings and Speeches, Vol. 17, Part 1",
+    keywords: ["mahad", "water", "tank", "satyagraha", "chhadar", "चवदार", "महाड़"]
   },
   {
-    id: "DAIC-MS-1949-11",
-    title: "Final Address to the Constituent Assembly",
-    date: "25 November 1949",
-    location: "Constitution Hall, New Delhi",
-    accessionNo: "CAD/1949/OFF-REP-V9",
-    format: "Official Shorthand Report & Transcript",
-    collection: "Constituent Assembly Debates",
-    volume: "Vol. XI",
-    page: 297,
-    transcription: "Political democracy cannot last unless there lies at the base of it social democracy. What does social democracy mean? It means a way of life which recognizes liberty, equality and fraternity as the principles of life.",
-    translationMarathi: "सामाजिक लोकशाहीचा पाया असल्याशिवाय राजकीय लोकशाही टिकू शकत नाही. स्वातंत्र्य, समता आणि बंधुता हीच जीवनाची मूलभूत तत्त्वे आहेत.",
-    translationHindi: "राजनीतिक लोकतंत्र तब तक टिक नहीं सकता जब तक कि उसके आधार में सामाजिक लोकतंत्र न हो। इसका अर्थ है जीवन का एक ऐसा तरीका जो स्वतंत्रता, समानता और बंधुत्व को जीवन के सिद्धांतों के रूप में मान्यता देता है।",
-    sourceFile: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1200",
-    restoredFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
-    regions: [
-      { term: "social democracy", coords: { x: 18, y: 26, w: 32, h: 16 } },
-      { term: "liberty", coords: { x: 54, y: 44, w: 16, h: 12 } },
-      { term: "equality", coords: { x: 72, y: 44, w: 18, h: 12 } },
-      { term: "fraternity", coords: { x: 20, y: 62, w: 24, h: 14 } }
-    ]
-  },
-  {
-    id: "DAIC-MS-1936-05",
-    title: "Annihilation of Caste (Undelivered Address)",
+    id: "aoc-1936",
+    title: "Annihilation of Caste",
+    bookTitle: "Annihilation of Caste: A Critical Edition",
+    year: "1936",
     date: "May 1936",
-    location: "Lahore, Punjab",
-    accessionNo: "DAIC/PUB/1936/AOC-ED1",
-    format: "Monograph First Edition",
-    collection: "Social Philosophy & Reform",
-    volume: "Vol. 1",
-    page: 47,
-    transcription: "Reason and morality are the only two forces that can conquer selfishness. A community which can be easily broken is no community.",
-    translationMarathi: "बुद्धी आणि नैतिकता हीच दोन बळे स्वार्थावर मात करू शकतात. अन्यायाने सहजासहजी मोडू शकणारा समाज हा खरा समाज नाही.",
-    translationHindi: "तर्क और नैतिकता ही वे दो शक्तियां हैं जो स्वार्थ को जीत सकती हैं। जो समुदाय आसानी से टूट जाए वह समुदाय नहीं है।",
-    sourceFile: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1200",
-    restoredFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
-    regions: [
-      { term: "Reason", coords: { x: 14, y: 24, w: 18, h: 12 } },
-      { term: "morality", coords: { x: 34, y: 24, w: 20, h: 12 } },
-      { term: "community", coords: { x: 48, y: 64, w: 26, h: 14 } }
-    ]
-  }
-];
-
-export const AUDIO_VISUAL_VAULT = [
-  {
-    id: "AV-REC-1956",
-    title: "BBC Radio Interview on Indian Constitution & Democracy",
-    year: "1953",
-    speaker: "Dr. B. R. Ambedkar with Francis Watson (BBC)",
-    duration: "03:42",
-    format: "Analogue 78 RPM Shellac / Re-mastered Flac",
-    archiveReference: "DAIC/SND/1953/BBC-01",
-    transcripts: [
-      { time: 0, speaker: "Interviewer", text: "Dr. Ambedkar, do you believe democracy will take root in India?" },
-      { time: 6, speaker: "Dr. Ambedkar", text: "Democracy in India is only a top-dressing on an Indian soil which is essentially undemocratic." },
-      { time: 14, speaker: "Dr. Ambedkar", text: "Our society is divided into castes which bring about separation and antipathy between human beings." },
-      { time: 24, speaker: "Dr. Ambedkar", text: "Unless these inequalities are removed, the structure of political democracy remains in jeopardy." }
-    ]
+    place: "Lahore / Bombay",
+    category: "Philosophy",
+    summary: "A foundational text critiquing caste hierarchy and religious orthodoxy, arguing that reason and fraternity must govern democratic society.",
+    quotes: {
+      en: "Reason and morality are the only two forces that can conquer selfishness. A community which can be easily broken by injustice is no true community.",
+      mr: "बुद्धी आणि नैतिकता हीच दोन बळे स्वार्थावर मात करू शकतात. अन्यायाने सहजासहजी मोडू शकणारा समाज हा खरा समाज नाही.",
+      hi: "तर्क और नैतिकता ही वे दो शक्तियां हैं जो स्वार्थ को जीत सकती हैं। जो समाज अन्याय से आसानी से टूट जाए वह सच्चा समाज नहीं है।"
+    },
+    phonetic: {
+      mr: "Buddhi aani naitikta heech don bale swarthavar maat karu shaktat. Anyaayane sahjasahji modu shaknaara samaaj haa khara samaaj naahi.",
+      hi: "Tark aur naitikta hi ve do shaktiyaan hain jo swarth ko jeet sakti hain. Jo samaaj anyaay se aasaani se toot jaaye vah sachha samaaj nahi hai."
+    },
+    citation: "Annihilation of Caste (First Edition, 1936)",
+    keywords: ["caste", "annihilation", "jat-pat", "morality", "जाती", "जाति"]
   },
   {
-    id: "AV-REC-1949",
-    title: "Presentation of Draft Constitution in Constituent Assembly",
+    id: "democracy-1949",
+    title: "Final Speech in Constituent Assembly",
+    bookTitle: "Constituent Assembly Debates: The Final Draft",
     year: "1949",
-    speaker: "Dr. B. R. Ambedkar (Chairman, Drafting Committee)",
-    duration: "04:15",
-    format: "All India Radio Shorthand Master Disc",
-    archiveReference: "AIR/ARCH/CAD/1949-V9",
-    transcripts: [
-      { time: 0, speaker: "Dr. Ambedkar", text: "I have completed the task entrusted to me by this House." },
-      { time: 8, speaker: "Dr. Ambedkar", text: "I feel that the Constitution is workable, it is flexible and it is strong enough to hold the country together." },
-      { time: 18, speaker: "Dr. Ambedkar", text: "If things go wrong under the new Constitution, the reason will not be that we had a bad Constitution, but that Man was vile." }
-    ]
+    date: "25 November 1949",
+    place: "New Delhi",
+    category: "Constitution",
+    summary: "Dr. Ambedkar's concluding address warning the nation that political democracy cannot survive without social and economic equality.",
+    quotes: {
+      en: "Political democracy cannot last unless there lies at the base of it social democracy. It means a way of life which recognizes liberty, equality, and fraternity as the principles of life.",
+      mr: "सामाजिक लोकशाहीचा पाया असल्याशिवाय राजकीय लोकशाही टिकू शकत नाही. स्वातंत्र्य, समता आणि बंधुता हीच जीवनाची मूलभूत तत्त्वे आहेत.",
+      hi: "राजनीतिक लोकतंत्र तब तक टिक नहीं सकता जब तक कि उसके आधार में सामाजिक लोकतंत्र न हो। इसका अर्थ है स्वतंत्रता, समानता और बंधुत्व को जीवन के सिद्धांतों के रूप में अपनाना।"
+    },
+    phonetic: {
+      mr: "Saamaajik lokshahicha paaya aslyashivaay raajkiya lokshahi tiku shakat naahi. Swaatantrya, samata aani bandhuta heech jeevanaachi mulbhoot tatve aahyet.",
+      hi: "Raajneetik loktantra tab tak tik nahi sakta jab tak ki uske aadhar mein saamaajik loktantra na ho. Iska arth hai swatantrata, samaanta aur bandhutva ko jeevan ke siddhanto ke roop mein apnaana."
+    },
+    citation: "Constituent Assembly Debates, Vol. XI",
+    keywords: ["democracy", "constitution", "assembly", "fraternity", "संविधान", "लोकशाही", "लोकतंत्र"]
   }
 ];
 
-export const CHRONOLOGY = [
-  { year: "1923", title: "Bar-at-Law & D.Sc.", source: "London School of Economics / Gray's Inn", desc: "Awarded Doctor of Science for 'The Problem of the Rupee' and called to the Bar." },
-  { year: "1927", title: "Mahad Satyagraha", source: "Colaba Gazetted Records", desc: "First organized public action asserting untouchables' right to drink water from public tanks." },
-  { year: "1932", title: "Poona Pact", source: "Yerwada Central Prison Records", desc: "Historic agreement replacing separate electorates with reserved seats in provincial legislatures." },
-  { year: "1947", title: "Cabinet Appointment", source: "Gazette of India Extraordinary", desc: "Appointed as the first Minister of Law and Justice of independent India." },
-  { year: "1949", title: "Constituent Assembly Drafting", source: "Assembly Proceedings", desc: "Drafting Committee Chairman presents the Constitution of India for final adoption." }
+export const TIMELINE_DATA = [
+  {
+    year: "1891",
+    title: "Birth at Mhow",
+    desc: "Born on 14th April in Mhow, Central Provinces (now Madhya Pradesh)."
+  },
+  {
+    year: "1923",
+    title: "Doctor of Science & Bar-at-Law",
+    desc: "Completed D.Sc. at London School of Economics and called to the Bar at Gray's Inn, London."
+  },
+  {
+    year: "1927",
+    title: "Mahad Satyagraha",
+    desc: "Led the movement at Chhadar Tank to assert equal rights to public drinking water."
+  },
+  {
+    year: "1932",
+    title: "Poona Pact",
+    desc: "Signed historic agreement ensuring reserved legislative seats for the Depressed Classes."
+  },
+  {
+    year: "1947",
+    title: "First Law Minister of India",
+    desc: "Appointed to independent India's first Union Cabinet under Prime Minister Jawaharlal Nehru."
+  },
+  {
+    year: "1949",
+    title: "Adoption of the Constitution",
+    desc: "As Chairman of the Drafting Committee, presented the final draft of the Constitution of India."
+  }
 ];

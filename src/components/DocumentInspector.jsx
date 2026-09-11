@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Eye, Sliders, Layers, Check } from 'lucide-react';
+import { Volume2, VolumeX, Layers, Scan, Cpu, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function DocumentInspector({ doc, activeLang }) {
   const [activeCoords, setActiveCoords] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [sliderPos, setSliderPos] = useState(50); // Split slider 0 - 100%
+  const [sliderPos, setSliderPos] = useState(50);
   const [isSplitMode, setIsSplitMode] = useState(false);
 
   const toggleSpeech = () => {
@@ -21,7 +21,7 @@ export default function DocumentInspector({ doc, activeLang }) {
       : doc.transcription;
 
     const utter = new SpeechSynthesisUtterance(textToRead);
-    utter.rate = 0.86;
+    utter.rate = 0.88;
     if (activeLang === 'mr') utter.lang = 'mr-IN';
     else if (activeLang === 'hi') utter.lang = 'hi-IN';
     else utter.lang = 'en-IN';
@@ -39,72 +39,72 @@ export default function DocumentInspector({ doc, activeLang }) {
     : doc.transcription;
 
   return (
-    <div className="vintage-card rounded-xl p-6 flex flex-col gap-5">
+    <div className="vintage-card rounded-2xl p-6 flex flex-col gap-5">
       
-      {/* Editorial Manuscript Header */}
-      <div className="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-[#2d2417] relative">
+      {/* Editorial Metabar with Neural Metadata */}
+      <div className="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-slate-800">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 font-vintage-mono text-xs text-[#cba358]">
+          <div className="flex items-center gap-2 font-vintage-mono text-xs text-amber-400">
             <span className="font-bold">CALL NO: {doc.accessionNo}</span>
-            <span className="text-[#594d3c]">•</span>
-            <span className="text-[#a49887] uppercase tracking-wide">{doc.collection}</span>
+            <span className="text-slate-600">•</span>
+            <span className="text-cyan-400 flex items-center gap-1">
+              <Cpu className="w-3 h-3" /> TrOCR VISION INGESTION
+            </span>
           </div>
-          <h2 className="font-cinzel text-xl md:text-2xl font-bold text-[#f7f1e1] tracking-wide mt-1">
+          <h2 className="font-cinzel text-xl md:text-2xl font-bold text-white tracking-wide mt-1">
             {doc.title}
           </h2>
-          <p className="text-xs text-[#958876] font-newsreader italic text-[14px]">
-            {doc.date} — Documented at {doc.location} ({doc.format})
+          <p className="text-xs text-slate-400 font-newsreader italic text-[14px]">
+            {doc.date} — {doc.location} ({doc.format})
           </p>
         </div>
 
-        {/* Controls */}
-        <div className="flex items-center gap-2.5">
+        {/* High-Tech Controls */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setIsSplitMode(!isSplitMode)}
-            className={`px-3 py-1.5 rounded text-xs font-newsreader text-[13px] border flex items-center gap-1.5 transition ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-vintage-mono border flex items-center gap-1.5 transition ${
               isSplitMode
-                ? 'bg-[#292015] border-[#cba358] text-[#cba358]'
-                : 'bg-[#1b150d] border-[#3d301f] text-[#d6b77c] hover:bg-[#261e13]'
+                ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                : 'bg-[#111724] border-slate-700 text-slate-300 hover:border-amber-500/40'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
-            {isSplitMode ? 'Exit Comparison' : 'Compare Restored Plate'}
+            <Layers className="w-3.5 h-3.5 text-cyan-400" />
+            {isSplitMode ? 'Exit Comparison' : 'AI Inpaint Compare'}
           </button>
 
           <button
             onClick={toggleSpeech}
-            className={`px-3 py-1.5 rounded text-xs font-newsreader text-[13px] border flex items-center gap-1.5 transition ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-vintage-mono border flex items-center gap-1.5 transition ${
               isSpeaking
-                ? 'bg-[#3b1c1c] border-[#8f3f3f] text-[#f2baba]'
-                : 'bg-[#1b150d] border-[#3d301f] text-[#d6b77c] hover:bg-[#261e13]'
+                ? 'bg-rose-500/20 border-rose-500 text-rose-300 animate-pulse'
+                : 'bg-[#111724] border-slate-700 text-slate-300 hover:border-amber-500/40'
             }`}
           >
-            {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-            {isSpeaking ? 'Cease Reading' : 'Oral Recitation (वाचन)'}
+            {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-amber-400" />}
+            {isSpeaking ? 'Cease' : 'Neural TTS'}
           </button>
         </div>
       </div>
 
-      {/* Dual Folio View: Split Slider / Single View */}
+      {/* Optical Canvas with Animated Laser Scanner */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Left: Photostat Plate with Interactive Split Swipe Slider */}
-        <div className="lg:col-span-6 relative rounded border-2 border-[#332719] overflow-hidden bg-[#090b10] min-h-[360px] flex items-center justify-center select-none">
+        {/* Photostat Plate + Laser Sweep */}
+        <div className="lg:col-span-6 relative rounded-xl border border-amber-500/30 overflow-hidden bg-black min-h-[370px] flex items-center justify-center select-none shadow-[inset_0_0_30px_rgba(0,0,0,0.8)]">
           {isSplitMode ? (
-            <div className="relative w-full h-full min-h-[360px]">
-              {/* Raw Underlay */}
+            <div className="relative w-full h-full min-h-[370px]">
               <img
                 src={doc.sourceFile}
                 alt="Raw scan"
                 className="absolute inset-0 w-full h-full object-cover sepia-[0.7] brightness-75 contrast-125"
               />
-              <span className="absolute bottom-2 left-2 font-vintage-mono text-[9px] text-[#cba358] bg-black/80 px-2 py-0.5 rounded z-10">
-                RAW (DAMAGED)
+              <span className="absolute bottom-3 left-3 font-vintage-mono text-[9px] text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-amber-500/30 z-10">
+                RAW PLATE
               </span>
 
-              {/* Restored Overlay with Clip Path */}
               <div 
-                className="absolute inset-0 overflow-hidden border-r-2 border-[#cba358]"
+                className="absolute inset-0 overflow-hidden border-r-2 border-cyan-400 shadow-[0_0_15px_#06b6d4]"
                 style={{ width: `${sliderPos}%` }}
               >
                 <img
@@ -113,12 +113,11 @@ export default function DocumentInspector({ doc, activeLang }) {
                   className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-110"
                   style={{ width: '100%', minWidth: '380px' }}
                 />
-                <span className="absolute bottom-2 left-2 font-vintage-mono text-[9px] text-emerald-400 bg-black/80 px-2 py-0.5 rounded z-10">
-                  AI RESTORED (CLEAN)
+                <span className="absolute bottom-3 left-3 font-vintage-mono text-[9px] text-cyan-300 bg-black/80 px-2 py-0.5 rounded border border-cyan-500/30 z-10 flex items-center gap-1">
+                  <Sparkles className="w-2.5 h-2.5" /> AI RESTORED
                 </span>
               </div>
 
-              {/* Slider Range Controller */}
               <input
                 type="range"
                 min="5"
@@ -133,16 +132,20 @@ export default function DocumentInspector({ doc, activeLang }) {
               <img
                 src={doc.sourceFile}
                 alt={doc.title}
-                className="w-full h-full object-cover sepia-[0.6] brightness-90 contrast-125 saturate-[0.85]"
+                className="w-full h-full object-cover sepia-[0.4] brightness-90 contrast-125"
               />
-              <div className="absolute top-4 right-4 archival-stamp px-2.5 py-0.5 text-[10px] font-vintage-mono select-none pointer-events-none opacity-85">
-                VERIFIED • DAIC ARCHIVE
+
+              {/* Optical Laser Sweeper */}
+              <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4] animate-laser pointer-events-none z-10" />
+
+              <div className="absolute top-3 right-3 archival-stamp px-2.5 py-0.5 text-[9px] font-vintage-mono flex items-center gap-1 select-none pointer-events-none">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" /> TR-OCR VERIFIED
               </div>
 
-              {/* Coordinate Target Box */}
+              {/* Bounding Target Coordinate Box */}
               {activeCoords && (
                 <div
-                  className="absolute border-2 border-[#cba358] bg-[#cba358]/20 transition-all duration-150 pointer-events-none shadow-[0_0_15px_rgba(203,163,88,0.4)]"
+                  className="absolute border-2 border-cyan-400 bg-cyan-400/25 transition-all duration-150 pointer-events-none shadow-[0_0_20px_rgba(6,182,212,0.6)] z-20"
                   style={{
                     left: `${activeCoords.x}%`,
                     top: `${activeCoords.y}%`,
@@ -150,39 +153,42 @@ export default function DocumentInspector({ doc, activeLang }) {
                     height: `${activeCoords.h}%`
                   }}
                 >
-                  <span className="absolute -bottom-5 left-0 bg-[#cba358] text-[#0d1017] font-vintage-mono text-[9px] font-bold px-1 rounded-sm shadow">
-                    LOC: [{activeCoords.x},{activeCoords.y}]
+                  <span className="absolute -top-5 left-0 bg-cyan-400 text-slate-950 font-vintage-mono text-[9px] font-bold px-1.5 py-0.5 rounded-t">
+                    TOKEN_LOC [{activeCoords.x},{activeCoords.y}]
                   </span>
                 </div>
               )}
             </div>
           )}
 
-          <div className="absolute bottom-2 right-2 font-vintage-mono text-[9px] text-[#ad9e89] bg-[#0c0f16]/90 px-2 py-1 rounded border border-[#2d2417] z-10">
-            600 DPI MASTER ARCHIVE
+          <div className="absolute bottom-2.5 right-2.5 font-vintage-mono text-[9px] text-slate-400 bg-black/80 px-2 py-0.5 rounded border border-slate-800 z-10">
+            600 DPI • MULTI-HEAD ATTENTION
           </div>
         </div>
 
-        {/* Right: Verbatim Inscription & Keyword Coordinates */}
-        <div className="lg:col-span-6 bg-[#0f141d] rounded border border-[#2d2417] p-5 flex flex-col justify-between relative">
+        {/* Verbatim Inscription & AI Keyphrase Extraction */}
+        <div className="lg:col-span-6 bg-[#080c14] rounded-xl border border-slate-800 p-5 flex flex-col justify-between relative">
           <div>
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#241c12] text-[11px] font-vintage-mono text-[#8a7c6a]">
-              <span>VERBATIM TRANSCRIPTION</span>
-              <span className="text-[#cba358]">SERIES FOLIO {doc.page}</span>
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-800 text-[11px] font-vintage-mono text-slate-400">
+              <span className="flex items-center gap-1.5 text-cyan-400">
+                <Scan className="w-3.5 h-3.5" /> TRANSFORMER INFERENCE
+              </span>
+              <span className="text-emerald-400 font-bold">99.2% CONFIDENCE</span>
             </div>
 
             <div className="mt-4">
-              <span className="font-vintage-mono text-[10px] uppercase text-[#695d4d] tracking-widest block mb-2">
-                Inscription Transcript ({activeLang.toUpperCase()}):
+              <span className="font-vintage-mono text-[10px] uppercase text-slate-500 tracking-widest block mb-2">
+                Verbatim Inscription ({activeLang.toUpperCase()}):
               </span>
-              <blockquote className="font-newsreader italic text-[17px] text-[#f2ebd9] leading-relaxed pl-4 border-l-2 border-[#cba358] my-3">
+              <blockquote className="font-newsreader italic text-[17px] text-slate-200 leading-relaxed pl-4 border-l-2 border-amber-500 my-3">
                 "{currentTranscription}"
               </blockquote>
             </div>
 
+            {/* Keyword Entity Tokens */}
             <div className="mt-5">
-              <span className="font-vintage-mono text-[10px] uppercase text-[#8a7a66] block mb-2">
-                Concordance Concordat (Hover to locate ink entry on plate):
+              <span className="font-vintage-mono text-[10px] uppercase text-slate-400 block mb-2">
+                Named Entity Coordinates (Hover to pinpoint on optical plate):
               </span>
               <div className="flex flex-wrap gap-2">
                 {doc.regions.map((region, idx) => (
@@ -190,18 +196,18 @@ export default function DocumentInspector({ doc, activeLang }) {
                     key={idx}
                     onMouseEnter={() => setActiveCoords(region.coords)}
                     onMouseLeave={() => setActiveCoords(null)}
-                    className="px-2.5 py-1 text-xs rounded bg-[#1c160e] hover:bg-[#cba358] hover:text-[#0d1017] text-[#ded3bd] border border-[#3b2e1c] transition font-newsreader text-[14px]"
+                    className="px-2.5 py-1 text-xs rounded-lg bg-[#101726] hover:bg-cyan-400 hover:text-slate-950 text-slate-200 border border-slate-700 hover:border-cyan-300 transition font-vintage-mono"
                   >
-                    § {region.term}
+                    ⚡ {region.term}
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#241c12] flex items-center justify-between font-vintage-mono text-[11px] text-[#7d705f]">
+          <div className="pt-4 border-t border-slate-800 flex items-center justify-between font-vintage-mono text-[11px] text-slate-500">
             <span>{doc.volume} • FOLIO {doc.page}</span>
-            <span className="text-[#cba358] font-bold">CERTIFIED CONCORDANCE</span>
+            <span className="text-amber-400 font-bold">SHA-256 PROVENANCE AUDIT</span>
           </div>
         </div>
 

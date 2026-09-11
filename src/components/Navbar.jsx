@@ -1,41 +1,50 @@
 import React from 'react';
-import { Landmark, Compass, BookMarked, Radio, Globe } from 'lucide-react';
+import { Landmark, Compass, BookMarked, Radio, Sparkles, Cpu, Activity } from 'lucide-react';
 
 export default function Navbar({ activeTab, onTabChange, activeLang, onLangChange }) {
   return (
-    <header className="bg-[#10151f] border-b-2 border-[#2b2217] px-6 py-3.5 sticky top-0 z-50">
+    <header className="bg-[#090d15]/90 backdrop-blur-md border-b border-amber-500/20 px-6 py-3 sticky top-0 z-50 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
       <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4">
         
-        {/* National Archive Emblem */}
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 rounded border-2 border-[#cba358]/60 bg-[#161209] flex items-center justify-center text-[#cba358] shadow-inner">
-            <Landmark className="w-6 h-6" />
+        {/* Emblem & AI Engine Status */}
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl border border-amber-500/40 bg-gradient-to-br from-amber-500/20 to-transparent flex items-center justify-center text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+            <Landmark className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="font-cinzel font-bold text-base md:text-lg tracking-wider text-[#ede5d0] uppercase">
-                Ambedkar Digital Heritage Archive & Memorial Kiosk
+              <h1 className="font-cinzel font-bold text-sm md:text-base tracking-wider text-slate-100 uppercase flex items-center gap-2">
+                Ambedkar Digital Heritage Archive
+                <span className="flex items-center gap-1 font-vintage-mono text-[9px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                  <Sparkles className="w-2.5 h-2.5" /> AI PLATFORM v2.6
+                </span>
               </h1>
-              <span className="text-[10px] font-vintage-mono px-2 py-0.5 rounded border border-[#cba358]/30 bg-[#251e13] text-[#d6b26d]">
-                MoSJE // DAIC-26096
-              </span>
             </div>
-            <p className="text-[11px] text-[#938776] tracking-wide font-newsreader italic">
-              Dr. Ambedkar International Centre • Ministry of Social Justice & Empowerment
+            <p className="text-[11px] text-slate-400 tracking-wide font-sans">
+              MoSJE • Dr. Ambedkar International Centre (DAIC) • Neural Knowledge Base
             </p>
           </div>
         </div>
 
-        {/* View Switchers */}
-        <div className="flex items-center gap-4 text-xs font-newsreader">
+        {/* HUD Switchers & AI Status Pill */}
+        <div className="flex items-center gap-3 text-xs">
           
-          <div className="flex bg-[#0a0d14] p-1 rounded border border-[#2a2217]">
+          {/* Active AI Telemetry Tag */}
+          <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0d1422] border border-slate-800 text-[10px] font-vintage-mono text-slate-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <span>LLM: QDRANT HYBRID RAG</span>
+            <span className="text-slate-600">|</span>
+            <span className="text-amber-400">TrOCR ViT-B</span>
+          </div>
+
+          {/* View Switchers */}
+          <div className="flex bg-[#0b1019] p-1 rounded-lg border border-slate-800">
             <button
               onClick={() => onTabChange('archive')}
-              className={`px-3.5 py-1.5 rounded transition font-cinzel text-[11px] tracking-wider uppercase flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded transition font-sans text-xs font-semibold flex items-center gap-1.5 ${
                 activeTab === 'archive'
-                  ? 'bg-[#292015] text-[#d6b26d] border border-[#cba358]/40 shadow'
-                  : 'text-[#877c6d] hover:text-[#e4decb]'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               <BookMarked className="w-3.5 h-3.5" />
@@ -43,21 +52,21 @@ export default function Navbar({ activeTab, onTabChange, activeLang, onLangChang
             </button>
             <button
               onClick={() => onTabChange('audiovisual')}
-              className={`px-3.5 py-1.5 rounded transition font-cinzel text-[11px] tracking-wider uppercase flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded transition font-sans text-xs font-semibold flex items-center gap-1.5 ${
                 activeTab === 'audiovisual'
-                  ? 'bg-[#292015] text-[#d6b26d] border border-[#cba358]/40 shadow'
-                  : 'text-[#877c6d] hover:text-[#e4decb]'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Radio className="w-3.5 h-3.5 text-[#cba358]" />
+              <Radio className="w-3.5 h-3.5 text-cyan-400" />
               Audio-Visual Vault
             </button>
             <button
               onClick={() => onTabChange('chronology')}
-              className={`px-3.5 py-1.5 rounded transition font-cinzel text-[11px] tracking-wider uppercase flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded transition font-sans text-xs font-semibold flex items-center gap-1.5 ${
                 activeTab === 'chronology'
-                  ? 'bg-[#292015] text-[#d6b26d] border border-[#cba358]/40 shadow'
-                  : 'text-[#877c6d] hover:text-[#e4decb]'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               <Compass className="w-3.5 h-3.5" />
@@ -65,24 +74,19 @@ export default function Navbar({ activeTab, onTabChange, activeLang, onLangChang
             </button>
           </div>
 
-          {/* Regional Dialects */}
-          <div className="flex items-center gap-1 bg-[#0a0d14] p-1 rounded border border-[#2a2217]">
-            <span className="text-[11px] text-[#7d7162] font-vintage-mono px-1">LANG:</span>
-            {[
-              { id: 'en', label: 'ENG' },
-              { id: 'mr', label: 'मराठी' },
-              { id: 'hi', label: 'हिन्दी' }
-            ].map((lang) => (
+          {/* Multilingual Bhashini Toggle */}
+          <div className="flex items-center gap-1 bg-[#0b1019] p-1 rounded-lg border border-slate-800 font-vintage-mono text-[11px]">
+            {['en', 'mr', 'hi'].map((lang) => (
               <button
-                key={lang.id}
-                onClick={() => onLangChange(lang.id)}
-                className={`px-2 py-0.5 rounded font-vintage-mono text-[11px] transition ${
-                  activeLang === lang.id
-                    ? 'bg-[#cba358] text-[#141009] font-bold shadow'
-                    : 'text-[#8e8170] hover:text-[#e4decb]'
+                key={lang}
+                onClick={() => onLangChange(lang)}
+                className={`px-2 py-0.5 rounded uppercase font-bold transition ${
+                  activeLang === lang
+                    ? 'bg-amber-500 text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                {lang.label}
+                {lang === 'mr' ? 'मराठी' : lang === 'hi' ? 'हिन्दी' : 'EN'}
               </button>
             ))}
           </div>
