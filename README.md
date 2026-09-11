@@ -108,7 +108,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. The frontend calls the backend at
+Open http://localhost:5173. The frontend calls the backend at
 `http://localhost:8000` by default (override with `VITE_API_BASE_URL`
 in a `.env` file inside `frontend/`).
 
