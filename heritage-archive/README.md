@@ -84,5 +84,5 @@ Endpoints:
 - [x] Database schema & infra configs
 - [x] OCR + embedding ingestion pipeline
 - [x] Backend API & RAG engine
-- [ ] Kiosk/web frontend
+- [x] Frontend (React + Vite + Tailwind, in `../frontend/`)
 - [ ] Physical hardware kiosk (Raspberry Pi / thermal printer) — deferred
