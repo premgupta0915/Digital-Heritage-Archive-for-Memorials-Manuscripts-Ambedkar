@@ -77,6 +77,13 @@ Endpoints:
 - `POST /api/v1/rag/chat` — grounded RAG chat, every claim cited with (Volume, Page)
 - `POST /api/v1/kiosk/print-souvenir` — souvenir summary text + QR payload (printing to actual hardware is not wired up — see Status)
 
+> The embedding models (`bge-m3`, CLIP) are ~2GB+ and load lazily on
+> first request to `/api/v1/search/*` or `/api/v1/rag/chat` — not at
+> server startup — so `uvicorn main:app` starts instantly and
+> `/api/archives`, `/api/search`, and `/health` work immediately. The
+> first RAG/search request will be slow (downloading + loading the
+> model into memory); after that it's cached.
+
 `services/bhashini_client.py` wraps BHASHINI for speech-to-text, text-to-speech, and translation, used to power multilingual voice interaction from the frontend.
 
 ## Status
