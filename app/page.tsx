@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Search, BookOpen, Landmark, Mic, Shield, RefreshCw, Clock, ChevronRight } from 'lucide-react';
 
 interface ArchiveItem {
-  id: number;
+  id: string;
   title: string;
   category: string;
   author: string;
@@ -41,9 +41,9 @@ export default function Home() {
       setBackendStatus(false);
       // Fallback data if backend is down
       setArchives([
-        { id: 1, title: "Annihilation of Caste", category: "speeches", author: "Dr. B.R. Ambedkar", description: "The seminal 1936 speech and essay targeting the Hindu caste system.", date: "1936" },
-        { id: 2, title: "Drafting the Indian Constitution", category: "manuscripts", author: "Dr. B.R. Ambedkar", description: "Original handwritten notes and drafts showcasing fundamental rights.", date: "1948" },
-        { id: 3, title: "Chaityabhoomi Memorial", category: "memorials", author: "National Heritage Site", description: "The final resting place of Babasaheb Ambedkar in Mumbai, mapped in 3D.", date: "Permanent" }
+        { id: "fallback-1", title: "Annihilation of Caste", category: "speeches", author: "Dr. B.R. Ambedkar", description: "The seminal 1936 speech and essay targeting the Hindu caste system.", date: "1936" },
+        { id: "fallback-2", title: "Drafting the Indian Constitution", category: "manuscripts", author: "Dr. B.R. Ambedkar", description: "Original handwritten notes and drafts showcasing fundamental rights.", date: "1948" },
+        { id: "fallback-3", title: "Chaityabhoomi Memorial", category: "memorials", author: "National Heritage Site", description: "The final resting place of Babasaheb Ambedkar in Mumbai, mapped in 3D.", date: "Permanent" }
       ]);
     } finally {
       setLoading(false);
