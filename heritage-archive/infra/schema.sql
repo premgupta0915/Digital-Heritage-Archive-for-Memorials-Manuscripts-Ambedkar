@@ -28,7 +28,7 @@ CREATE TYPE processing_status AS ENUM (
 
 CREATE TYPE asset_kind AS ENUM (
     'original_scan', 'preprocessed_image', 'ocr_text',
-    'thumbnail', 'audio_transcript', 'translated_text'
+    'thumbnail', 'audio_transcript', 'translated_text', 'media_file'
 );
 
 -- ---------------------------------------------------------------------
@@ -92,6 +92,7 @@ CREATE TABLE digital_assets (
     height_px           INTEGER,
     ocr_engine          VARCHAR(50),                    -- 'tesseract' | 'trocr' | null
     ocr_raw_text        TEXT,
+    duration_seconds    NUMERIC(10,2),                   -- for asset_kind = 'media_file' (audio/video)
     qdrant_point_id     UUID,                            -- id of vector in Qdrant, if applicable
     qdrant_collection   VARCHAR(100),                    -- 'ambedkar_texts_v1' | 'ambedkar_visuals_v1'
     created_at          TIMESTAMPTZ NOT NULL DEFAULT now(),

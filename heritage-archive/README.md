@@ -76,6 +76,9 @@ Endpoints:
 - `POST /api/v1/search/cross-modal` — semantic text search + text-to-image / image-to-image search
 - `POST /api/v1/rag/chat` — grounded RAG chat, every claim cited with (Volume, Page)
 - `POST /api/v1/kiosk/print-souvenir` — souvenir summary text + QR payload (printing to actual hardware is not wired up — see Status)
+- `GET /api/media` — list audio/video documentaries, lectures, interviews, with a playable presigned URL when a file has been uploaded
+- `POST /api/media/upload` — upload a new audio/video file (multipart form: title, description, item_type, file, etc.) — stored in MinIO, registered in Postgres
+- `POST /api/v1/translate` — translate text into any language (German, Spanish, French, Japanese, etc.) via Claude, for foreign-language kiosk support beyond BHASHINI's Indian-language scope
 
 > The embedding models (`bge-m3`, CLIP) are ~2GB+ and load lazily on
 > first request to `/api/v1/search/*` or `/api/v1/rag/chat` — not at
