@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Node / React
+node_modules/
+dist/
+build/
+.env.local
+
+# Docker / data volumes
+*.log
+.DS_Store
+
+# Model weights / large artifacts
+*.pt
+*.bin
+*.onnx
+models/
+
+# IDE
+.vscode/
+.idea/
