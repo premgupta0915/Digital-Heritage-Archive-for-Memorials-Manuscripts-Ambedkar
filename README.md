@@ -1,14 +1,18 @@
 # Digital Heritage Archive for Memorials, Manuscripts & Ambedkar (SIH26096)
 
-An AI-powered digital heritage platform dedicated to Dr. B. R. Ambedkar,
-built for Smart India Hackathon (Problem Statement SIH26096), sponsored
-by the Ministry of Social Justice and Empowerment — designed for
-institutions like the Dr. Ambedkar International Centre.
+🧩 Problem
 
-It digitizes and makes searchable Ambedkar's writings, speeches, rare
-manuscripts (including historical Modi script), and constitutional
-debates, with an AI research assistant grounded in the archive and
-multilingual support.
+Millions of pages of Dr. Ambedkar's writings, speeches, and constitutional debates exist only as physical manuscripts — some written in Modi script, a historical script almost nobody can read today. This material is locked away from researchers and the public: hard to search, hard to translate, and at risk of physical decay.
+
+💡 Solution
+
+An AI-powered digital heritage archive that:
+
+Digitizes manuscripts with OCR built for both modern and historical scripts
+Makes the archive semantically searchable (search by meaning, not just keywords)
+Lets users ask questions in plain language and get answers that cite the exact volume and page — so it never fabricates history
+Supports multilingual translation/narration, audio-video archival, an interactive timeline, and geo-tagged memorial locations
+Delivers this through an interactive kiosk-style interface, similar to modern museum installations — but AI-native
 
 ## Repo layout
 
