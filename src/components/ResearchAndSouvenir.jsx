@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Mic, BookMarked, Printer, Check, Feather } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function ResearchAndSouvenir({ activeDoc }) {
   const [query, setQuery] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const [researchResult, setResearchResult] = useState({
     summary: "Dr. B. R. Ambedkar formulated democracy not merely as a government structure, but as a mode of associated living and conjoint communicated experience founded upon Liberty, Equality, and Fraternity.",
     source: "Constituent Assembly Debates, Official Report Vol. IX, 25 Nov 1949",
@@ -14,6 +14,43 @@ export default function ResearchAndSouvenir({ activeDoc }) {
 
   const [isDispensing, setIsDispensing] = useState(false);
   const [dispensedAlert, setDispensedAlert] = useState(false);
+
+  // Live Speech Recognition
+  const handleLiveSpeech = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      // Fallback if browser doesn't permit microphone
+      setIsListening(true);
+      setQuery("Listening via regional audio (बोलिए)...");
+      setTimeout(() => {
+        setIsListening(false);
+        const speech = "What civic proclamation was declared at the 1927 Mahad Satyagraha?";
+        setQuery(speech);
+        handleSearch(speech);
+      }, 1600);
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-IN';
+
+      recognition.onstart = () => setIsListening(true);
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setQuery(transcript);
+        handleSearch(transcript);
+      };
+      recognition.onerror = () => setIsListening(false);
+      recognition.onend = () => setIsListening(false);
+
+      recognition.start();
+    } catch (e) {
+      setIsListening(false);
+    }
+  };
 
   const handleSearch = (customText) => {
     const q = customText || query;
@@ -29,18 +66,7 @@ export default function ResearchAndSouvenir({ activeDoc }) {
         referenceId: activeDoc.accessionNo
       });
       setIsProcessing(false);
-    }, 700);
-  };
-
-  const handleVoiceInput = () => {
-    setIsRecording(true);
-    setQuery("Transcribing oral inquiry...");
-    setTimeout(() => {
-      setIsRecording(false);
-      const text = "What civic proclamation was declared at the 1927 Mahad Satyagraha?";
-      setQuery(text);
-      handleSearch(text);
-    }, 1800);
+    }, 600);
   };
 
   const handlePrintSouvenir = () => {
@@ -63,13 +89,13 @@ export default function ResearchAndSouvenir({ activeDoc }) {
   return (
     <div className="flex flex-col gap-6">
       
-      {/* 1. Scholarly Corpus Inquiry Box */}
+      {/* 1. Corpus Search Card */}
       <div className="vintage-card rounded-xl p-5 flex flex-col gap-3.5">
         <div className="flex items-center justify-between pb-2.5 border-b border-[#2d2417]">
           <div className="flex items-center gap-2">
             <Feather className="w-4 h-4 text-[#cba358]" />
             <h3 className="font-cinzel text-xs font-bold uppercase tracking-wider text-[#f0e8d5]">
-              Corpus Exegesis & Cross-Inquiry
+              Corpus Exegesis & AI Query
             </h3>
           </div>
           <span className="font-vintage-mono text-[9px] text-[#cba358] bg-[#241c12] border border-[#4a3a22] px-2 py-0.5 rounded">
@@ -77,7 +103,7 @@ export default function ResearchAndSouvenir({ activeDoc }) {
           </span>
         </div>
 
-        {/* Vintage Styled Search Bar */}
+        {/* Input Bar */}
         <div className="flex gap-2">
           <input
             type="text"
@@ -88,11 +114,11 @@ export default function ResearchAndSouvenir({ activeDoc }) {
             className="flex-1 bg-[#0c1017] border border-[#382d1c] rounded px-3 py-2 text-xs text-[#ede5d2] font-newsreader text-[14px] placeholder:text-[#6a5e4d] focus:outline-none focus:border-[#cba358]"
           />
           <button
-            onClick={handleVoiceInput}
-            title="Oral Speech Ingestion"
+            onClick={handleLiveSpeech}
+            title="Live Microphone Ingestion"
             className={`p-2 rounded border text-xs transition flex items-center justify-center ${
-              isRecording 
-                ? 'bg-[#3b1919] border-[#8a3333] text-[#e89e9e]' 
+              isListening 
+                ? 'bg-rose-950 border-rose-600 text-rose-300 animate-pulse' 
                 : 'bg-[#1a140d] border-[#382d1c] text-[#cba358] hover:bg-[#261e13]'
             }`}
           >
@@ -103,11 +129,11 @@ export default function ResearchAndSouvenir({ activeDoc }) {
             disabled={isProcessing || !query.trim()}
             className="px-3.5 py-2 bg-[#cba358] hover:bg-[#b58e45] disabled:opacity-50 text-[#141009] font-cinzel font-bold text-[11px] uppercase tracking-wider rounded transition"
           >
-            {isProcessing ? 'Consulting...' : 'Query'}
+            {isProcessing ? '...' : 'Query'}
           </button>
         </div>
 
-        {/* Canonical Grounded Record Citation */}
+        {/* Grounded Citation */}
         <div className="bg-[#0e121a] border border-[#292015] rounded p-4 space-y-2 mt-0.5">
           <div className="flex items-center justify-between text-[11px] font-vintage-mono text-[#a1917b]">
             <span className="text-[#cba358] font-bold flex items-center gap-1.5">
@@ -126,7 +152,7 @@ export default function ResearchAndSouvenir({ activeDoc }) {
         </div>
       </div>
 
-      {/* 2. Physical Souvenir Station: Perforated Vintage Library Docket */}
+      {/* 2. Physical Souvenir Station */}
       <div className="vintage-card rounded-xl p-5 flex flex-col gap-3.5">
         <div className="flex items-center justify-between pb-2.5 border-b border-[#2d2417]">
           <div className="flex items-center gap-2">
@@ -142,9 +168,8 @@ export default function ResearchAndSouvenir({ activeDoc }) {
           Dispenses an authentic archival index slip for researcher portfolios and museum visitors.
         </p>
 
-        {/* Perforated Vintage Paper Ticket */}
+        {/* Vintage Paper Docket */}
         <div className="vintage-parchment-receipt rounded p-4 font-vintage-mono text-[11px] text-[#241e15] border border-[#b8ab8e] space-y-2 relative">
-          
           <div className="text-center pb-2 border-b border-dashed border-[#786b54]">
             <div className="font-cinzel font-bold tracking-widest text-[11px] uppercase text-[#141009]">
               DR. AMBEDKAR MEMORIAL ARCHIVE
@@ -173,10 +198,9 @@ export default function ResearchAndSouvenir({ activeDoc }) {
               AUTHENTICATED
             </div>
           </div>
-
         </div>
 
-        {/* Action Trigger */}
+        {/* Print Trigger */}
         <div className="space-y-2">
           <button
             onClick={handlePrintSouvenir}

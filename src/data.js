@@ -13,6 +13,7 @@ export const ARCHIVE_DATA = [
     translationMarathi: "आम्ही केवळ चवदार तळ्याचे पाणी पिण्यासाठी जात नाही आहोत. आम्ही इतर माणसांसारखीच माणसे आहोत हे सिद्ध करण्यासाठी चाललो आहोत.",
     translationHindi: "हम केवल पानी पीने के लिए चवदार तालाब नहीं जा रहे हैं। हम यह सिद्ध करने जा रहे हैं कि हम भी अन्य लोगों की तरह मनुष्य हैं।",
     sourceFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
+    restoredFile: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1200",
     regions: [
       { term: "Chhadar Tank", coords: { x: 20, y: 32, w: 28, h: 14 } },
       { term: "human beings", coords: { x: 55, y: 65, w: 26, h: 14 } },
@@ -33,6 +34,7 @@ export const ARCHIVE_DATA = [
     translationMarathi: "सामाजिक लोकशाहीचा पाया असल्याशिवाय राजकीय लोकशाही टिकू शकत नाही. स्वातंत्र्य, समता आणि बंधुता हीच जीवनाची मूलभूत तत्त्वे आहेत.",
     translationHindi: "राजनीतिक लोकतंत्र तब तक टिक नहीं सकता जब तक कि उसके आधार में सामाजिक लोकतंत्र न हो। इसका अर्थ है जीवन का एक ऐसा तरीका जो स्वतंत्रता, समानता और बंधुत्व को जीवन के सिद्धांतों के रूप में मान्यता देता है।",
     sourceFile: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1200",
+    restoredFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
     regions: [
       { term: "social democracy", coords: { x: 18, y: 26, w: 32, h: 16 } },
       { term: "liberty", coords: { x: 54, y: 44, w: 16, h: 12 } },
@@ -42,7 +44,7 @@ export const ARCHIVE_DATA = [
   },
   {
     id: "DAIC-MS-1936-05",
-    title: "Annihilation of Caste (Undelivered Presidential Address)",
+    title: "Annihilation of Caste (Undelivered Address)",
     date: "May 1936",
     location: "Lahore, Punjab",
     accessionNo: "DAIC/PUB/1936/AOC-ED1",
@@ -54,6 +56,7 @@ export const ARCHIVE_DATA = [
     translationMarathi: "बुद्धी आणि नैतिकता हीच दोन बळे स्वार्थावर मात करू शकतात. अन्यायाने सहजासहजी मोडू शकणारा समाज हा खरा समाज नाही.",
     translationHindi: "तर्क और नैतिकता ही वे दो शक्तियां हैं जो स्वार्थ को जीत सकती हैं। जो समुदाय आसानी से टूट जाए वह समुदाय नहीं है।",
     sourceFile: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1200",
+    restoredFile: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
     regions: [
       { term: "Reason", coords: { x: 14, y: 24, w: 18, h: 12 } },
       { term: "morality", coords: { x: 34, y: 24, w: 20, h: 12 } },
@@ -62,8 +65,40 @@ export const ARCHIVE_DATA = [
   }
 ];
 
+export const AUDIO_VISUAL_VAULT = [
+  {
+    id: "AV-REC-1956",
+    title: "BBC Radio Interview on Indian Constitution & Democracy",
+    year: "1953",
+    speaker: "Dr. B. R. Ambedkar with Francis Watson (BBC)",
+    duration: "03:42",
+    format: "Analogue 78 RPM Shellac / Re-mastered Flac",
+    archiveReference: "DAIC/SND/1953/BBC-01",
+    transcripts: [
+      { time: 0, speaker: "Interviewer", text: "Dr. Ambedkar, do you believe democracy will take root in India?" },
+      { time: 6, speaker: "Dr. Ambedkar", text: "Democracy in India is only a top-dressing on an Indian soil which is essentially undemocratic." },
+      { time: 14, speaker: "Dr. Ambedkar", text: "Our society is divided into castes which bring about separation and antipathy between human beings." },
+      { time: 24, speaker: "Dr. Ambedkar", text: "Unless these inequalities are removed, the structure of political democracy remains in jeopardy." }
+    ]
+  },
+  {
+    id: "AV-REC-1949",
+    title: "Presentation of Draft Constitution in Constituent Assembly",
+    year: "1949",
+    speaker: "Dr. B. R. Ambedkar (Chairman, Drafting Committee)",
+    duration: "04:15",
+    format: "All India Radio Shorthand Master Disc",
+    archiveReference: "AIR/ARCH/CAD/1949-V9",
+    transcripts: [
+      { time: 0, speaker: "Dr. Ambedkar", text: "I have completed the task entrusted to me by this House." },
+      { time: 8, speaker: "Dr. Ambedkar", text: "I feel that the Constitution is workable, it is flexible and it is strong enough to hold the country together." },
+      { time: 18, speaker: "Dr. Ambedkar", text: "If things go wrong under the new Constitution, the reason will not be that we had a bad Constitution, but that Man was vile." }
+    ]
+  }
+];
+
 export const CHRONOLOGY = [
-  { year: "1923", title: "Bar-at-Law & D.Sc.", source: "London School of Economics / Gray's Inn", desc: "Awarded Doctor of Science for 'The Problem of the Ruin' and called to the Bar." },
+  { year: "1923", title: "Bar-at-Law & D.Sc.", source: "London School of Economics / Gray's Inn", desc: "Awarded Doctor of Science for 'The Problem of the Rupee' and called to the Bar." },
   { year: "1927", title: "Mahad Satyagraha", source: "Colaba Gazetted Records", desc: "First organized public action asserting untouchables' right to drink water from public tanks." },
   { year: "1932", title: "Poona Pact", source: "Yerwada Central Prison Records", desc: "Historic agreement replacing separate electorates with reserved seats in provincial legislatures." },
   { year: "1947", title: "Cabinet Appointment", source: "Gazette of India Extraordinary", desc: "Appointed as the first Minister of Law and Justice of independent India." },

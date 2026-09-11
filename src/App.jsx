@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import DocumentInspector from './components/DocumentInspector';
 import ResearchAndSouvenir from './components/ResearchAndSouvenir';
+import AudioVisualVault from './components/AudioVisualVault';
 import ChronologyView from './components/ChronologyView';
 import { ARCHIVE_DATA } from './data';
 import { BookOpen, ChevronRight } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('archive');
+  const [activeTab, setActiveTab] = useState('archive'); // 'archive' | 'audiovisual' | 'chronology'
   const [activeLang, setActiveLang] = useState('en');
   const [selectedDocId, setSelectedDocId] = useState(ARCHIVE_DATA[0].id);
 
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0d1017] text-[#e4decb] flex flex-col font-sans">
       
-      {/* 1. Archival Emblem Header */}
+      {/* 1. Header */}
       <Navbar
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -26,14 +27,14 @@ export default function App() {
 
       {/* 2. Main Stage */}
       <main className="flex-1 max-w-[1700px] w-full mx-auto p-5 md:p-6">
-        {activeTab === 'archive' ? (
+        {activeTab === 'archive' && (
           <div className="flex flex-col gap-6">
             
-            {/* Folio Registry Selector */}
+            {/* Catalog Folios */}
             <div>
               <div className="flex items-center justify-between mb-3 px-1">
                 <span className="font-vintage-mono text-xs font-bold text-[#cba358] uppercase tracking-wider flex items-center gap-2">
-                  <BookOpen className="w-3.5 h-3.5" /> Archival Catalog Register (Choose a primary manuscript)
+                  <BookOpen className="w-3.5 h-3.5" /> Archival Catalog Register
                 </span>
                 <span className="font-vintage-mono text-[11px] text-[#7d705e]">
                   COLLECTION: 22 PUBLISHED TOMES
@@ -63,7 +64,7 @@ export default function App() {
                       <div className="mt-3 text-[11px] text-[#786c5a] flex items-center justify-between font-newsreader italic text-[13px] border-t border-[#261f15] pt-2">
                         <span>{doc.collection}</span>
                         <span className="text-[#cba358] font-vintage-mono text-[10px] uppercase font-bold flex items-center not-italic">
-                          Open Folio <ChevronRight className="w-3 h-3 ml-0.5" />
+                          Inspect <ChevronRight className="w-3 h-3 ml-0.5" />
                         </span>
                       </div>
                     </button>
@@ -83,12 +84,18 @@ export default function App() {
             </div>
 
           </div>
-        ) : (
+        )}
+
+        {activeTab === 'audiovisual' && (
+          <AudioVisualVault />
+        )}
+
+        {activeTab === 'chronology' && (
           <ChronologyView />
         )}
       </main>
 
-      {/* 3. Colophon Footer */}
+      {/* 3. Footer */}
       <footer className="border-t border-[#261f15] bg-[#090c12] py-3.5 px-6 text-xs text-[#706453]">
         <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-4 font-vintage-mono text-[10px]">
           <div>
