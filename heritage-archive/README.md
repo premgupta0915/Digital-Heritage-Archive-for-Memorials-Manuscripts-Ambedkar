@@ -60,9 +60,29 @@ Run ingestion on a folder of scanned pages:
 python backend/ingestion_pipeline.py --input ./scans --script modi --volume "Writings and Speeches Vol. 5"
 ```
 
+## Backend API & RAG
+
+```bash
+export ANTHROPIC_API_KEY=your_key_here
+export DATABASE_URL=postgresql://heritage_admin:change_me_in_env@localhost:5432/heritage_archive
+export BHASHINI_USER_ID=your_bhashini_user_id
+export BHASHINI_ULCA_API_KEY=your_bhashini_key
+
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+Endpoints:
+- `POST /api/v1/search/cross-modal` — semantic text search + text-to-image / image-to-image search
+- `POST /api/v1/rag/chat` — grounded RAG chat, every claim cited with (Volume, Page)
+- `POST /api/v1/kiosk/print-souvenir` — souvenir summary text + QR payload (printing to actual hardware is not wired up — see Status)
+
+`services/bhashini_client.py` wraps BHASHINI for speech-to-text, text-to-speech, and translation, used to power multilingual voice interaction from the frontend.
+
 ## Status
 
 - [x] Database schema & infra configs
 - [x] OCR + embedding ingestion pipeline
-- [ ] Backend API & RAG engine
+- [x] Backend API & RAG engine
 - [ ] Kiosk/web frontend
+- [ ] Physical hardware kiosk (Raspberry Pi / thermal printer) — deferred
